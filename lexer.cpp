@@ -16,34 +16,36 @@ void Lexer::read()
 	}
 	char ch;
 	int id = -2, idS = -2;
-	std::string buf = "", bufF = "";
+	std::string buf = "";
 	while(fin.get(ch))
 	{
 		if((ch == 32)||(ch == '\n')){ continue; } //space char 
-		
+
 		if(!isNormChar(std::string(1, ch))){ throw std::string("unidentified char[ ") + ch + " ]"; }
 
 		buf += ch;
-		//std::cout<<"buf:"<<buf<<'\n';
-		if(id = getTokenType(buf) != -1) {
+		id = getTokenType(buf);
+
+		if( id != -1 ) {
 			idS = id;
 			continue;
 		}
 
 		if( !buf.empty() )
 		{
-			//std::cout<<"buf1:\n";
 			Token token = listOfTokens_->getTypes()[idS];
 			token.setValue(buf.substr(0, buf.length()-1));
 			tokens_.push_back(token);
 
 			buf = ch;
+			idS = getTokenType(buf);			
 		}		
 	}
 
-	if(idS = getTokenType(buf) != -1)
+	id = getTokenType(buf);
+	if(id != -1)
 	{
-		Token token = listOfTokens_->getTypes()[idS];
+		Token token = listOfTokens_->getTypes()[id];
 		token.setValue(buf);
 		tokens_.push_back(token);
 	}
@@ -52,7 +54,7 @@ void Lexer::read()
 int Lexer::getTokenType(std::string line) {
 	for (int i = 0; i < listOfTokens_->getTypes().size(); i++) {
     		std::regex r(listOfTokens_->getTypes()[i].getRegexLine());
-		if(std::regex_match(line.data(), r))
+		if(std::regex_match(line, r))
 		{
 			return i;
 		}
@@ -64,7 +66,7 @@ int Lexer::getTokenType(std::string line) {
 bool Lexer::isNormChar(std::string line)
 {
 	std::regex r(listOfTokens_->getNorm());
-	return std::regex_match(line.data(), r);
+	return std::regex_match(line, r);
 }
 
 void Lexer::print()

@@ -15,8 +15,6 @@ public:
 	void setValue(std::string value);
 
 	Token& operator=(const Token& from);
-	
-	int a = 5;
 
 private:
 	std::string type_ = "";
