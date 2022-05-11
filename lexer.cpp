@@ -54,7 +54,7 @@ void Lexer::read()
 int Lexer::getTokenType(std::string line) {
 	for (int i = 0; i < listOfTokens_->getTypes().size(); i++) {
     		std::regex r(listOfTokens_->getTypes()[i].getRegexLine());
-		std::cout<<"er"<<i<<'\n';
+		//std::cout<<"er"<<i<<'\n';
 		if(std::regex_match(line, r))
 		{
 			return i;
