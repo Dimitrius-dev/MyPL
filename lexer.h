@@ -26,6 +26,8 @@ public:
 	void print();
 
 	bool isNormChar(std::string line);
+
+	std::vector<Token> getTokens() const;
 };
 
 #endif

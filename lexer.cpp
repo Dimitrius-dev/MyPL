@@ -19,7 +19,7 @@ void Lexer::read()
 	std::string buf = "";
 	while(fin.get(ch))
 	{
-		if((ch == 32)||(ch == '\n')){ continue; } //space char 
+		if( (ch == ' ')||(ch == '\t') ){ continue; } //space char 
 
 		if(!isNormChar(std::string(1, ch))){ throw std::string("unidentified char[ ") + ch + " ]"; }
 
@@ -49,6 +49,13 @@ void Lexer::read()
 		token.setValue(buf);
 		tokens_.push_back(token);
 	}
+
+	if(tokens_[tokens_.size() - 1].getType() != "END")
+	{
+		Token token = listOfTokens_->getTokenByName("END");
+		tokens_.push_back(token);
+	}
+	
 }
 
 int Lexer::getTokenType(std::string line) {
@@ -77,4 +84,9 @@ void Lexer::print()
 		std::cout<<"type:|"<<'\t'<<i.getType()<<'\t'<<"|value:|"<<i.getValue()<<"|\n";
 	}
 	
+}
+
+std::vector<Token> Lexer::getTokens() const
+{
+	return tokens_;
 }

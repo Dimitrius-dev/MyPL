@@ -16,6 +16,7 @@ public:
 	ListOfTokens();
 	std::vector<Token> getTypes();
 	std::string getNorm() const;
+	Token getTokenByName(std::string name) const;
 };
 
 #endif

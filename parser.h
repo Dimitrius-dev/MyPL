@@ -14,18 +14,24 @@
 class Parser
 {
 private:
-	std::string path_;
 	std::vector<Token> tokens_;
-	ListOfTokens *listOfTokens_ = new ListOfTokens();
+	int indexOfcurToken = 0;
+
+	void parseVar();
+	void parseWhile();
+	void parseFor();
+	void parsePrint();
+	void parseIf();
+
+	void expect(std::string type, bool isSeveral);
 
 public:
-	Lexer(std::string path);
-	void read();
-	int getTokenType(std::string line);
-
+	Parser(std::vector<Token> tokens);
 	void print();
 
-	bool isNormChar(std::string line);
+	void read();
+
+
 };
 
 #endif
