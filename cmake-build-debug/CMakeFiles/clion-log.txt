@@ -1,0 +1,4 @@
+/home/notroot/Загрузки/clion-2022.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/notroot/Загрузки/clion-2022.1.1/bin/ninja/linux/ninja -G Ninja -S /home/notroot/Programing/prog/c++/DSL -B /home/notroot/Programing/prog/c++/DSL/cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/notroot/Programing/prog/c++/DSL/cmake-build-debug

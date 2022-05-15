@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-g++ main.cpp lexer.cpp -o main
-./main example.dsl
