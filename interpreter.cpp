@@ -1,4 +1,5 @@
-#include "Interpreter.h"
+#include "interpreter.h"
+#include "node.h"
 
 Interpreter::Interpreter() {
     variables = new std::map<std::string, int>();

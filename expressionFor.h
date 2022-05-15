@@ -2,9 +2,9 @@
 
 #include "expression.h"
 
-class expressionWhile final: public Expression {
+class ExpressionWhile final: public Expression {
 public:
-    expressionWhile(const int& lineNum);
+    ExpressionWhile(const int& lineNum);
 
     void action(const InterpreterArgs& args) const override;
 };

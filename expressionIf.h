@@ -2,9 +2,9 @@
 
 #include "expression.h"
 
-class expressionIf final: public Expression {
+class ExpressionIf final: public Expression {
 public:
-    expressionIf(const int& lineNum);
+    ExpressionIf(const int& lineNum);
 
     void action(const InterpreterArgs& args) const override;
 };

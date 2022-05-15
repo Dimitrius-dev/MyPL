@@ -1,33 +1,26 @@
 #ifndef LEXER
 #define LEXER
 
-#include <iostream>
-#include <fstream>
+
 #include <list>
-#include <vector>
 #include <string>
 #include <regex>
 
 #include "token.h"
-#include "listOfTokens.h"
 
 class Lexer
 {
 private:
-	std::string path_;
-	std::vector<Token> tokens_;
-	ListOfTokens *listOfTokens_ = new ListOfTokens();
+	std::list<Token> tokens;
+	std::map<std::string, std::regex> lexems;
 
 public:
-	Lexer(std::string path);
-	void read();
-	int getTokenType(std::string line);
-
+	Lexer();
+	void readFile(std::string path);
+	bool checkToken(std::string input);	
+	void addToken(std::string input, int lineNum);
+	
 	void print();
-
-	bool isNormChar(std::string line);
-
-	std::vector<Token> getTokens() const;
 };
 
 #endif

@@ -1,31 +1,26 @@
 #include "token.h"
 
-Token::Token(std::string type, std::string regexLine)
-: type_(type), regexLine_(regexLine)
+Token::Token(std::string type, std::string value, int lineNum)
+: type(type), value(value), lineNum(lineNum)
 {
-
 }
 
 std::string Token::getType() const
 {
-	return type_;
-}
-
-std::string Token::getRegexLine() const
-{
-	return regexLine_;
+	return type;
 }
 
 std::string Token::getValue() const
 {
-	return value_;
+	return value;
 }
 
 void Token::setValue(std::string value)
 {
-	value_ = value;
+	value = value;
 }
 
+/*
 Token& Token::operator=(const Token& from)
 {
 	type_ = from.getType();
@@ -33,3 +28,4 @@ Token& Token::operator=(const Token& from)
 	value_ = from.getValue();
 	return *this;
 }
+*/

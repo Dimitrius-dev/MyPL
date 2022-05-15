@@ -2,8 +2,8 @@
 
 #include <string>
 
-ExpressionVar::ExpressionVar(std::string name, const int& lineNum):
-Expression(EXP_VAR, lineNum), name(name) {}
+ExpressionVar::ExpressionVar(std::string name, const int& lineNum)
+: Expression(EXP_VAR, lineNum), name(name) {}
 
 void ExpressionVar::action(const InterpreterArgs& args) const {
     if (!callVariableFrom(args.variables, args.stack)) {
@@ -17,8 +17,7 @@ void ExpressionVar::action(const InterpreterArgs& args) const {
     {
 	return;
     }
-    throw ExcExp("usage of undeclared var '" + id +  "'", lineNum);
-
+    throw std::string("usage of undeclared var");
     
 }
 

@@ -4,12 +4,10 @@
 #include <iostream>
 #include <fstream>
 #include <list>
-#include <vector>
 #include <string>
 #include <regex>
-
+#include "node.h"
 #include "token.h"
-#include "listOfTokens.h"
 
 class Parser
 {

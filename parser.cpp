@@ -2,8 +2,9 @@
 
 #include "expression.h"
 
-Parser::Parser(std::vector<Token> tokens)
-: tokens_(tokens)
+
+Parser::Parser(Node* node)
+: node(node)
 {
 }
 
@@ -25,6 +26,7 @@ void compare(std::list<Token> tokens)
 // пока нет необходимости	
 bool checkLine(std::list<Token> tokens)
 {
+	return true;
 }
 
 

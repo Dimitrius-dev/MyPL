@@ -2,7 +2,7 @@
 #include <string>
 
 #include "lexer.h"
-#include "parser.h"
+//#include "parser.h"
 
 int main(int argc, char* argv[])
 {
@@ -14,12 +14,12 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		Lexer lexer((std::string)argv[1]);
-		lexer.read();		
-		//lexer.print();
-		Parser parser(lexer.getTokens());
-		parser.print();
-		parser.read();
+		Lexer lexer();
+		lexer.readFile((std::string)argv[1]);		
+		lexer.print();
+		//Parser parser(lexer.getTokens());
+		//parser.print();
+		//parser.read();
 
 	}
 	catch(std::string error)

@@ -1,92 +1,104 @@
 #include "lexer.h"
 
-Lexer::Lexer(std::string path)
-: path_(path)
+#include <iostream>
+#include <fstream>
+
+Lexer::Lexer()
+: lexems({
+	{"VAR", std::regex("[a-z][A-Za-z0-9]*")},
+	{"ASSIGN", std::regex("\\=")},
+	{"NUMBER", std::regex("[-]?[1-9]+[0-9]*")},
+	{"OPERATION", std::regex("(\\+|\\-|\\/|\\*")},
+	{"PRINT", std::regex("print")},
+	{"LBR", std::regex("\\(")},
+	{"RBR", std::regex("\\)")},
+	{"LFBR", std::regex("\\{")},
+	{"RFBR", std::regex("\\}")},
+	{"SM", std::regex("\\<")},
+	{"GR", std::regex("\\>")},
+	{"EQ", std::regex("\\=\\=")},
+	{"WHILE", std::regex("while")},
+	{"FOR", std::regex("for")}
+	//{"END", std::regex("\\n")},
+	
+})
+
 {
 	// tokens.push_back(Token());
 }
 
-void Lexer::read()
+void Lexer::readFile(std::string path)
 {
-	std::ifstream fin;
-    	fin.open(path_);
-	if (!fin.is_open())
-	{
-		throw "file does nor exist";
-	}
-	char ch;
-	int id = -2, idS = -2;
-	std::string buf = "";
-	while(fin.get(ch))
-	{
-		if( (ch == ' ')||(ch == '\t') ){ continue; } //space char 
+    std::ifstream file(path);
 
-		if(!isNormChar(std::string(1, ch))){ throw std::string("unidentified char[ ") + ch + " ]"; }
+    if (!file.is_open()) {
+        file.close();
+        throw std::string("can't open file ") + path;
+    }
 
-		buf += ch;
-		id = getTokenType(buf);
+    std::string line;
+    for (int i = 0; getline(file, line); i++) {
+        if (!line.empty()) {
+            std::string oldStr;
 
-		if( id != -1 ) {
-			idS = id;
-			continue;
-		}
+            for (int startIndex = 0, endIndex = 1; endIndex <= line.size(); endIndex++) {
+                if (startIndex < endIndex) {
+                    std::string newStr = line.substr(startIndex, endIndex - startIndex);
+                    if (newStr == " ") {
+                        startIndex++;
+                        continue;
+                    } else if (!checkToken(newStr)) {
+                        addToken(oldStr.empty() ? newStr : oldStr, i + 1);
+                        endIndex--;
+                        startIndex = endIndex;
+                    } else if (endIndex == line.size()) {
+                        addToken(newStr, i + 1);
+                        tokens.push_back(Token("END", "\\n", i + 1));
+                    }
 
-		if( !buf.empty() )
-		{
-			Token token = listOfTokens_->getTypes()[idS];
-			token.setValue(buf.substr(0, buf.length()-1));
-			tokens_.push_back(token);
+                    oldStr = newStr;
+                }
+            }
+        }
+    }
 
-			buf = ch;
-			idS = getTokenType(buf);			
-		}		
-	}
-
-	id = getTokenType(buf);
-	if(id != -1)
-	{
-		Token token = listOfTokens_->getTypes()[id];
-		token.setValue(buf);
-		tokens_.push_back(token);
-	}
-
-	if(tokens_[tokens_.size() - 1].getType() != "END")
-	{
-		Token token = listOfTokens_->getTokenByName("END");
-		tokens_.push_back(token);
-	}
-	
+    file.close();
 }
 
-int Lexer::getTokenType(std::string line) {
-	for (int i = 0; i < listOfTokens_->getTypes().size(); i++) {
-    		std::regex r(listOfTokens_->getTypes()[i].getRegexLine());
-		//std::cout<<"er"<<i<<'\n';
-		if(std::regex_match(line, r))
+
+bool Lexer::checkToken(std::string input)
+{
+	for(auto lexem : lexems)
+	{
+		if(std::regex_match(input, lexem.second))
 		{
-			return i;
+			return true;
 		}
 	}
-	return -1;
-
+	return false;
 }
 
-bool Lexer::isNormChar(std::string line)
-{
-	std::regex r(listOfTokens_->getNorm());
-	return std::regex_match(line, r);
+void Lexer::addToken(std::string input, int lineNum) {
+
+	for(auto lexem : lexems)
+	{
+		if(std::regex_match(input, lexem.second))
+		{
+			tokens.push_back(Token(lexem.first, input, lineNum));
+			return;
+		}
+	}
+
+	throw std::string("lexem not found");
+
 }
 
 void Lexer::print()
 {
 	
-	for(auto i : tokens_) {
-		std::cout<<"type:|"<<'\t'<<i.getType()<<'\t'<<"|value:|"<<i.getValue()<<"|\n";
+	for(auto token : tokens) {
+		std::cout<<"type:|"<<'\t'<<token.getType()<<'\t'<<"|value:|"<<token.getValue()<<"|\n";
 	}
 	
 }
 
-std::vector<Token> Lexer::getTokens() const
-{
-	return tokens_;
-}

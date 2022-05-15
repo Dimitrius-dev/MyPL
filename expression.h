@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InterpreterArgs.h"
+#include "interpreterArgs.h"
 
 enum ExpressionType {
     EXP_VAR,
@@ -27,10 +27,7 @@ enum ExpressionType {
     EXP_LOOP_WHILE,
     EXP_LOOP_FOR,
 
-    EXP_CODE_BLOCK,
-
-    EXP_BRACKET_L,
-    EXP_BRACKET_R,
+    EXP_CODE_BLOCK
 };
 
 class Expression {
@@ -47,18 +44,4 @@ public:
     virtual void action(const InterpreterArgs& args) const = 0;
 
     bool isOperation() const;
-};
-
-class ExpressionBracketL final: public Expression {
-public:
-    ExpressionBracketL(): Expression(EXP_BRACKET_L, 0) { }
-    void action(const InterpreterArgs& args) const override { }
-    std::string toString() const override { return "("; }
-};
-
-class ExpressionBracketR final: public Expression {
-public:
-    ExpressionBracketR(): Expression(EXP_BRACKET_R, 0) { }
-    void action(const InterpreterArgs& args) const override { }
-    std::string toString() const override { return ")"; }
 };

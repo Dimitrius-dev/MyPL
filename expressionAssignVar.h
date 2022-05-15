@@ -4,9 +4,9 @@
 
 #include "expression.h"
 
-class expressionAssignVar final: public Expression {
+class ExpressionAssignVar final: public Expression {
 public:
-    expressionAssignVar(std::string name, const int& lineNum);
+    ExpressionAssignVar(std::string name, const int& lineNum);
 
     void action(const InterpreterArgs& args) const override;
 private:

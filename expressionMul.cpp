@@ -12,6 +12,6 @@ void ExpressionMul::action(const InterpreterArgs& args) const {
         args.stack.push(arg1 * arg2);
 
     } else {
-        throw std::string("function doesn't return any value") + lineNum;
+        throw std::string("function doesn't return any value");
     }
 }
