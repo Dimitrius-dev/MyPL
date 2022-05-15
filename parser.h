@@ -14,24 +14,19 @@
 class Parser
 {
 private:
-	std::vector<Token> tokens_;
-	int indexOfcurToken = 0;
-
-	void parseVar();
-	void parseWhile();
-	void parseFor();
-	void parsePrint();
-	void parseIf();
-
-	void expect(std::string type, bool isSeveral);
+	Node* node;
 
 public:
-	Parser(std::vector<Token> tokens);
-	void print();
+	Parser(Node* node);
 
-	void read();
+	void addTokens(std::list<Token> tokens);
+	void compare(std::list<Token> tokens);	
+	bool checkLine(std::list<Token> tokens);
 
-
+	void parseVarAssignment(std::list<Token> tokens);
+	void parseIf(std::list<Token> tokens);
+	void parseWhile(std::list<Token> tokens);
+	void parsePrint(std::list<Token> tokens);
 };
 
 #endif

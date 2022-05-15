@@ -1,65 +1,46 @@
 #include "parser.h"
 
+#include "expression.h"
+
 Parser::Parser(std::vector<Token> tokens)
 : tokens_(tokens)
 {
 }
 
-void Parser::print()
-{
-	std::cout<<"-----Parser-----\n";
-	for(auto i : tokens_) {
-		std::cout<<"type:|"<<'\t'<<i.getType()<<'\t'<<"|value:|"<<i.getValue()<<"|\n";
-	}
-}
-
-void Parser::read()
+//в конце вызвает compare и передает конечные строки
+//циклом разбиваю токены на строки токенов
+// например if - становится одной единой строкой
+void addTokens(std::list<Token> tokens)
 {
 	
-	if(tokens_[indexOfcurToken].getType() == "VAR"){	parseVar(); }
-	else if(tokens_[indexOfcurToken].getType() == "WHILE"){ parseWhile(); }
-	else if(tokens_[indexOfcurToken].getType() == "FOR"){	parseFor(); }
-	else if(tokens_[indexOfcurToken].getType() == "PRINT"){ parsePrint(); }
-	else if(tokens_[indexOfcurToken].getType() == "IF"){	parseIf(); }
-	else{ throw std::string("waiting token ") + "VAR"; } 
 }
 
-void Parser::parseVar()
+// метод должен понимать в какой парсер передавать строку
+// вначале if, передаем в parseIf, вначале var ->  
+void compare(std::list<Token> tokens)
 {
 
 }
 
-void Parser::parseWhile()
+// пока нет необходимости	
+bool checkLine(std::list<Token> tokens)
 {
-
 }
 
-void Parser::parseFor()
-{
 
+void parseVarAssignment(std::list<Token> tokens)
+{
+	Expression *expression = new ExpressionAssignVar(tokens.front.name, /*номер строки (положить в токен)*/ );  
 }
 
-void Parser::parsePrint()
+void parseIf(std::list<Token> tokens)
 {
-
 }
 
-void Parser::parseIf()
+void parseWhile(std::list<Token> tokens)
 {
-
 }
 
-void Parser::expect(std::string type, bool isSeveral)
+void parsePrint(std::list<Token> tokens)
 {
-	if(tokens_[indexOfcurToken].getType() == type)
-	{
-		indexOfcurToken++;
-	}
-	else
-	{
-		if(!isSeveral)
-		{
-			throw std::string("expected token ") + type;
-		}
-	}
 }
