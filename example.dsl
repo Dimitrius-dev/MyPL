@@ -1,2 +1,4 @@
-a = 5 + 4/1
-print(a)
+a = 5
+if(a < 6){
+ print(a)
+}

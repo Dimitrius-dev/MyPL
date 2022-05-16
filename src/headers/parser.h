@@ -30,9 +30,15 @@ public:
 
     std::list<Expression*> parseOperations(std::list<Token> tokens);
 
+    std::list<Expression *> parseLogicOperations(std::list<Token> tokens);
+
     short operatorPriority(std::string type);
 
+    short operatorLogicPriority(std::string type);
+
     std::list<Token> toPostfix(std::list<Token> tokens);
+
+    std::list<Token> toLogicPostfix(std::list<Token> tokens);
 
     Node* addNodeExpression(std::list<Expression*> expressions);
 

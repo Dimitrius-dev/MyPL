@@ -9,15 +9,10 @@
 
 int main(int argc, char* argv[])
 {
-//	if(argc != 2)
-//	{
-//		std::cout<<"enter the way\n";
-//		return 1;
-//	}
 
 	try
 	{
-		Lexer lexer;
+		Lexer lexer; ти
 		lexer.readFile("../example.dsl");//(std::string)argv[1]
 		lexer.print();
 

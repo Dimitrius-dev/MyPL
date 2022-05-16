@@ -9,22 +9,19 @@ Lexer::Lexer()
 	{"ASSIGN", std::regex("\\=")},
 	{"NUMBER", std::regex("[-]?[1-9]+[0-9]*")},
 	{"OPERATION", std::regex(R"(\+|\-|\/|\*)")},
+	{"LOG_OPERATION", std::regex(R"(\=\=|\>\=|\<\=|\<|\>)")},
 	{"PRINT", std::regex("print")},
 	{"LBR", std::regex("\\(")},
 	{"RBR", std::regex("\\)")},
 	{"LFBR", std::regex("\\{")},
 	{"RFBR", std::regex("\\}")},
-	{"SM", std::regex("\\<")},
-	{"GR", std::regex("\\>")},
-	{"EQ", std::regex("\\=\\=")},
 	{"WHILE", std::regex("while")},
-	{"FOR", std::regex("for")}
+	{"FOR", std::regex("for")},
+    {"IF", std::regex("if")}
 	//{"END", std::regex("\\n")},
 	
 })
-
 {
-	// tokens.push_back(Token());
 }
 
 void Lexer::readFile(std::string path)

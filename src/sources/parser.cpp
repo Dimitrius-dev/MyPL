@@ -11,10 +11,16 @@
 #include "expressionWhile.h"
 #include "expressionFor.h"
 #include "expressionIf.h"
+#include "expressionCodeBlock.h"
 
 
 
 #include "expressionAssignVar.h"
+#include "expressionSmaller.h"
+#include "expressionSmallerOrEq.h"
+#include "expressionEq.h"
+#include "expressionGreater.h"
+#include "expressionGreaterOrEq.h"
 #include <stack>
 Parser::Parser(Node* node)
 : node(node)
@@ -167,6 +173,40 @@ void Parser::parseFor(std::list<Token> tokens)
 void Parser::parseIf(std::list<Token> tokens)
 {
 
+    tokens.pop_front();//remove if
+    tokens.pop_front();//remove (
+
+    std::list<Token> conditionTokens;
+    int amount = 0;
+    for (auto token : tokens)
+    {
+        if(token.getType() != "LFBR")//until token '{'
+        {
+            amount++;
+            conditionTokens.push_back(token);
+        }
+        else
+        {
+            break;
+        }
+    }
+    conditionTokens.pop_back();//remove last token ')'
+
+    for(int i = 0; i < amount; i++)
+    {
+        tokens.pop_front();
+    }
+
+    tokens.pop_front();//remove token '{'
+    tokens.pop_back();//remove token '}'
+
+    auto nodeCondition = addNodeExpression(parseLogicOperations(conditionTokens));
+    auto nodeBlock = new Node(new ExpressionCodeBlock(tokens.front().getLine()));
+
+    Parser parser(nodeBlock);
+    parser.addTokens(tokens);
+
+    node->addChildBack(new Node(new ExpressionIf(nodeCondition, nodeBlock, tokens.front().getLine())));
 }
 
 void Parser::parseWhile(std::list<Token> tokens)
@@ -218,6 +258,39 @@ std::list<Expression *> Parser::parseOperations(std::list<Token> tokens) {
     return expressions;
 }
 
+std::list<Expression *> Parser::parseLogicOperations(std::list<Token> tokens) {
+    std::list<Expression*> expressions;
+    for(auto token: toLogicPostfix(tokens))
+    {
+        auto type = token.getType();
+        if(type == "LOG_OPERATION") {
+            auto op = token.getValue();
+            if (op == "<") {
+                expressions.push_back(new ExpressionSmaller(token.getLine()));
+            } else if (op == "<=") {
+                expressions.push_back(new ExpressionSmallerOrEq(token.getLine()));
+            } else if (op == "==") {
+                expressions.push_back(new ExpressionEq(token.getLine()));
+            } else if (op == ">") {
+                expressions.push_back(new ExpressionGreater(token.getLine()));
+            } else if (op == ">=") {
+                expressions.push_back(new ExpressionGreaterOrEq(token.getLine()));
+            }
+        } else if(type == "NUMBER")
+        {
+            expressions.push_back(new ExpressionVal(std::stoi(token.getValue()), token.getLine()));
+        }
+        else if(type == "VAR")
+        {
+            expressions.push_back(new ExpressionVar(token.getValue(), token.getLine()));
+        }
+
+    }
+
+
+    return expressions;
+}
+
 std::list<Token> Parser::toPostfix(std::list<Token> tokens) {
     std::list<Token> postfix;
     std::stack<Token> operators;
@@ -253,13 +326,57 @@ std::list<Token> Parser::toPostfix(std::list<Token> tokens) {
     return postfix;
 }
 
+std::list<Token> Parser::toLogicPostfix(std::list<Token> tokens) {
+    std::list<Token> postfix;
+    std::stack<Token> operators;
+
+    for (const auto &token: tokens) {
+        const auto& type = token.getType();
+
+        if (type == "LBR") {
+            operators.push(token);
+        } else if (type == "RBR") {
+            while (operators.top().getType() != "LBR") {
+                postfix.push_back(operators.top());
+                operators.pop();
+            }
+
+            operators.pop();
+        } else if (type == "LOG_OPERATION") {
+            while (!operators.empty() && operatorLogicPriority(token.getValue()) >= operatorLogicPriority(operators.top().getValue())) {
+                postfix.push_back(operators.top());
+                operators.pop();
+            }
+            operators.push(token);
+        } else {
+            postfix.push_back(token);
+        }
+    }
+
+    while (!operators.empty()) {
+        postfix.push_back(operators.top());
+        operators.pop();
+    }
+
+    return postfix;
+}
+
 short Parser::operatorPriority(std::string type) {
     if (type == "*" || type == "/") {
         return 1;
     } else if (type == "+" || type == "-") {
         return 2;
-    } else if (type == "<" || type == "<=" || type == ">" || type == ">=") {
+    } else
+    {
         return 3;
+    }
+}
+
+short Parser::operatorLogicPriority(std::string type) {
+    if (type == ">" || type == ">=" || type == "<" || type == "<=") {
+        return 1;
+    } else if (type == "==") {
+        return 2;
     } else
     {
         return 4;
