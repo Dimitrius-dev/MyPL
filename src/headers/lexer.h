@@ -12,7 +12,7 @@ class Lexer
 {
 private:
 	std::list<Token> tokens;
-	std::map<std::string, std::regex> lexems;
+	std::list<std::pair<std::string, std::regex>> lexems;
 
 public:
 	Lexer();

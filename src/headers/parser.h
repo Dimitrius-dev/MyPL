@@ -36,12 +36,12 @@ public:
 
     short operatorLogicPriority(std::string type);
 
-    std::list<Token> toPostfix(std::list<Token> tokens);
+    std::list<Token> toPostfix(std::list<Token> tokens, const std::string& typeOperation, const std::function<short(std::string type)>& m);
 
     std::list<Token> toLogicPostfix(std::list<Token> tokens);
 
     Node* addNodeExpression(std::list<Expression*> expressions);
 
-    void addTokensLine(std::list<Token> &tokens);
+    void parseLine(std::list<Token> &tokens);
 };
 #endif

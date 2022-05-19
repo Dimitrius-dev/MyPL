@@ -1,4 +1,4 @@
-a = 5
-if(a < 6){
- print(a)
-}
+a = 12
+ab = (4 + 1)
+print(a + ab)
+

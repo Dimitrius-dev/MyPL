@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		Lexer lexer; ти
+		Lexer lexer;
 		lexer.readFile("../example.dsl");//(std::string)argv[1]
 		lexer.print();
 

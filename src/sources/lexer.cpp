@@ -5,63 +5,54 @@
 
 Lexer::Lexer()
 : lexems({
-	{"VAR", std::regex("[a-z][A-Za-z0-9]*")},
+     {"WHILE", std::regex("while")},
+     {"FOR", std::regex("for")},
+     {"IF", std::regex("if")},
+     {"PRINT", std::regex("print")},
+
+     {"VAR", std::regex("[a-z][A-Za-z0-9]*")},
 	{"ASSIGN", std::regex("\\=")},
 	{"NUMBER", std::regex("[-]?[1-9]+[0-9]*")},
 	{"OPERATION", std::regex(R"(\+|\-|\/|\*)")},
 	{"LOG_OPERATION", std::regex(R"(\=\=|\>\=|\<\=|\<|\>)")},
-	{"PRINT", std::regex("print")},
+
 	{"LBR", std::regex("\\(")},
 	{"RBR", std::regex("\\)")},
 	{"LFBR", std::regex("\\{")},
 	{"RFBR", std::regex("\\}")},
-	{"WHILE", std::regex("while")},
-	{"FOR", std::regex("for")},
-    {"IF", std::regex("if")}
-	//{"END", std::regex("\\n")},
+
+	{"END", std::regex("\\n")}
 	
 })
-{
-}
+{}
 
 void Lexer::readFile(std::string path)
 {
-    std::ifstream file(path);
+    std::ifstream fin;
+    fin.open(path);
+    if (!fin.is_open()) { throw "file does not exist"; }
 
-    if (!file.is_open()) {
-        file.close();
-        throw std::string("can't open file ") + path;
-    }
+    int lineNum = 1;
+    char ch;
+    std::string token = "";
+    while(fin.get(ch))
+    {
+        if(ch == ' ' || ch == '\t') { continue; } //space char
 
-    std::string line;
-    for (int i = 0; getline(file, line); i++) {
-        if (!line.empty()) {
-            std::string oldStr;
-
-            for (int startIndex = 0, endIndex = 1; endIndex <= line.size(); endIndex++) {
-                if (startIndex < endIndex) {
-                    std::string newStr = line.substr(startIndex, endIndex - startIndex);
-                    if (newStr == " ") {
-                        startIndex++;
-                        continue;
-                    } else if (!checkToken(newStr)) {
-                        addToken(oldStr.empty() ? newStr : oldStr, i + 1);
-                        endIndex--;
-                        startIndex = endIndex;
-                    } else if (endIndex == line.size()) {
-                        addToken(newStr, i + 1);
-                        tokens.push_back(Token("END", "\\n", i + 1));
-                    }
-
-                    oldStr = newStr;
-                }
-            }
+        token += ch;
+        if(!token.empty() && checkToken(token)) { continue; }
+        else
+        {
+            addToken(token.substr(0, token.size() - 1), lineNum);
+            token = token[token.size() - 1];
         }
+
+        if(ch == '\n') { lineNum++; }
+
     }
 
-    file.close();
+    if(tokens.back().getType() != "END") { addToken("\\n", lineNum); }
 }
-
 
 bool Lexer::checkToken(std::string input)
 {
@@ -94,7 +85,7 @@ void Lexer::print()
 {
 	
 	for(auto token : tokens) {
-		std::cout<<"type:|"<<'\t'<<token.getType()<<'\t'<<"|value:|"<<token.getValue()<<"|\n";
+		std::cout<<"type:|"<<'\t'<<token.getType()<<'\t'<<"|value:|"<<token.getValue()<<'\t'<<"|line:|"<<token.getLine()<<"|\n";
 	}
 	
 }
