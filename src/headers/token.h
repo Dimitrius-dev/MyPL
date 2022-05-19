@@ -1,5 +1,4 @@
-#ifndef TOKEN
-#define TOKEN
+#pragma once
 
 #include "string"
 
@@ -20,5 +19,3 @@ private:
 	std::string type;
 	std::string value;
 };
-
-#endif

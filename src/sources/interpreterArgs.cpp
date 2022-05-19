@@ -6,6 +6,7 @@ InterpreterArgs::InterpreterArgs(
         std::stack<int>& stack
 ):
         variablesGlobal(variablesGlobal),
-        stack(stack) {
-            this->variables = variables;
-        }
+        stack(stack)
+{
+    this->variables = variables;
+}

@@ -1,26 +1,12 @@
 #include "parser.h"
 
-#include "expression.h"
-#include "expressionSum.h"
-#include "expressionDiv.h"
-#include "expressionSub.h"
-#include "expressionMul.h"
-#include "expressionVar.h"
-#include "expressionVal.h"
-#include "expressionPrint.h"
-#include "expressionWhile.h"
-#include "expressionFor.h"
-#include "expressionIf.h"
-#include "expressionCodeBlock.h"
+#include "node.h"
+#include "nodeSum.h"
+#include "nodeVar.h"
+#include "nodeVal.h"
+#include "nodeCodeBlock.h"
+#include "nodeAssignVar.h"
 
-
-
-#include "expressionAssignVar.h"
-#include "expressionSmaller.h"
-#include "expressionSmallerOrEq.h"
-#include "expressionEq.h"
-#include "expressionGreater.h"
-#include "expressionGreaterOrEq.h"
 #include <stack>
 Parser::Parser(Node* node)
 : node(node)
@@ -30,75 +16,6 @@ Parser::Parser(Node* node)
 //в конце вызвает compare и передает конечные строки
 //циклом разбиваю токены на строки токенов
 // например if - становится одной единой строкой
-
-/*
-void Parser::addTokens(std::list<Token> tokens)
-{
-    std::list<Token> tokenLine;
-
-    int openedBrackets = 0;// (
-    int openedBraces = 0;// {
-
-    bool operation = false;
-    bool end = false;
-    for( auto token : tokens)
-    {
-        const auto type = token.getType();
-
-        if (type == "END")
-        {
-            if (openedBraces == 0)
-            {
-                if (openedBrackets == 0)
-                {
-                    end = true;
-                }
-            }
-            else
-            {
-                tokenLine.push_back(token);
-            }
-        }
-        else
-        {
-            if( ( type == "VAR" || type == "FOR" || type == "WHILE" || type == "IF" || type == "PRINT" ) && !operation)
-            {
-                if (end)
-                {
-                    if (!tokenLine.empty())
-                    {
-                        parseLine(tokenLine);
-                        tokenLine.clear();
-                    }
-                }
-            }
-            else if (type == "OPERATION") {
-                operation = true;
-            } else if (type == "LBR") {
-                openedBrackets++;
-            } else if (type == "RBR") {
-                openedBrackets--;
-            } else if (type == "LFBR") {
-                openedBraces++;
-            } else if (type == "RFBR") {
-                openedBraces--;
-            } else {
-                operation = false;
-            }
-
-            end = false;
-            tokenLine.push_back(token);
-        }
-    }
-
-    if (!tokenLine.empty())
-    {
-        parseLine(tokenLine);
-        tokenLine.clear();
-    }
-}
-*/
-
 
 void Parser::addTokens(std::list<Token> tokens)
 {
@@ -129,7 +46,10 @@ void Parser::addTokens(std::list<Token> tokens)
 
         if( (type == "END") && (openedBraces == 0) && (openedBrackets == 0) )
         {
-            parseLine(tokenLine);
+            if(!tokenLine.empty())
+            {
+                parseLine(tokenLine);
+            }
             tokenLine.clear();
         } else
         {
@@ -190,12 +110,13 @@ void Parser::parseVarAssignment(std::list<Token> tokens)
 
     const auto & token = tokens.front();
 
-    auto nodeChild = new Node(new ExpressionAssignVar(token.getValue(), token.getLine()));
+    auto nodeChild = new NodeAssignVar(token.getValue(), token.getLine());
 
     tokens.pop_front();
     tokens.pop_front();
 
-    nodeChild->addChildBack(addNodeExpression(parseOperations(tokens)));
+    nodeChild->addChildBack(addMakedTree(parseOperations(tokens)));
+
     node->addChildBack(nodeChild);
 
 }
@@ -210,95 +131,96 @@ void Parser::parseFor(std::list<Token> tokens)
 void Parser::parseIf(std::list<Token> tokens)
 {
 
-    tokens.pop_front();//remove if
-    tokens.pop_front();//remove (
-
-    std::list<Token> conditionTokens;
-    int amount = 0;
-    for (auto token : tokens)
-    {
-        if(token.getType() != "LFBR")//until token '{'
-        {
-            amount++;
-            conditionTokens.push_back(token);
-        }
-        else
-        {
-            break;
-        }
-    }
-    conditionTokens.pop_back();//remove last token ')'
-
-    for(int i = 0; i < amount; i++)
-    {
-        tokens.pop_front();
-    }
-
-    tokens.pop_front();//remove token '{'
-    tokens.pop_back();//remove token '}'
-
-    auto nodeCondition = addNodeExpression(parseLogicOperations(conditionTokens));
-    auto nodeBlock = new Node(new ExpressionCodeBlock(tokens.front().getLine()));
-
-    Parser parser(nodeBlock);
-    parser.addTokens(tokens);
-
-    node->addChildBack(new Node(new ExpressionIf(nodeCondition, nodeBlock, tokens.front().getLine())));
+//    tokens.pop_front();//remove if
+//    tokens.pop_front();//remove (
+//
+//    std::list<Token> conditionTokens;
+//    int amount = 0;
+//    for (auto token : tokens)
+//    {
+//        if(token.getType() != "LFBR")//until token '{'
+//        {
+//            amount++;
+//            conditionTokens.push_back(token);
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
+//    conditionTokens.pop_back();//remove last token ')'
+//
+//    for(int i = 0; i < amount; i++)
+//    {
+//        tokens.pop_front();
+//    }
+//
+//    tokens.pop_front();//remove token '{'
+//    tokens.pop_back();//remove token '}'
+//
+//    auto nodeCondition = addNodenode(parseLogicOperations(conditionTokens));
+//    auto nodeBlock = new Node(new nodeCodeBlock(tokens.front().getLine()));
+//
+//    Parser parser(nodeBlock);
+//    parser.addTokens(tokens);
+//
+//    node->addChildBack(new Node(new nodeIf(nodeCondition, nodeBlock, tokens.front().getLine())));
 }
 
 void Parser::parseWhile(std::list<Token> tokens)
 {
-    tokens.pop_front();//remove if
-    tokens.pop_front();//remove (
-
-    std::list<Token> conditionTokens;
-    int amount = 0;
-    for (auto token : tokens)
-    {
-        if(token.getType() != "LFBR")//until token '{'
-        {
-            amount++;
-            conditionTokens.push_back(token);
-        }
-        else
-        {
-            break;
-        }
-    }
-    conditionTokens.pop_back();//remove last token ')'
-
-    for(int i = 0; i < amount; i++)
-    {
-        tokens.pop_front();
-    }
-
-    tokens.pop_front();//remove token '{'
-    tokens.pop_back();//remove token '}'
-
-    auto nodeCondition = addNodeExpression(parseLogicOperations(conditionTokens));
-    auto nodeBlock = new Node(new ExpressionCodeBlock(tokens.front().getLine()));
-
-    Parser parser(nodeBlock);
-    parser.addTokens(tokens);
-
-    node->addChildBack(new Node(new ExpressionWhile(nodeCondition, nodeBlock, tokens.front().getLine())));
+//    tokens.pop_front();//remove if
+//    tokens.pop_front();//remove (
+//
+//    std::list<Token> conditionTokens;
+//    int amount = 0;
+//    for (auto token : tokens)
+//    {
+//        if(token.getType() != "LFBR")//until token '{'
+//        {
+//            amount++;
+//            conditionTokens.push_back(token);
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
+//    conditionTokens.pop_back();//remove last token ')'
+//
+//    for(int i = 0; i < amount; i++)
+//    {
+//        tokens.pop_front();
+//    }
+//
+//    tokens.pop_front();//remove token '{'
+//    tokens.pop_back();//remove token '}'
+//
+//    auto nodeCondition = addNodenode(parseLogicOperations(conditionTokens));
+//    auto nodeBlock = new Node(new nodeCodeBlock(tokens.front().getLine()));
+//
+//    Parser parser(nodeBlock);
+//    parser.addTokens(tokens);
+//
+//    node->addChildBack(new Node(new nodeWhile(nodeCondition, nodeBlock, tokens.front().getLine())));
 }
 
 void Parser::parsePrint(std::list<Token> tokens)
 {
-    tokens.pop_front();
-    tokens.pop_front();
-    tokens.pop_back();
-
-    auto nodeChild = new Node(new ExpressionPrint(tokens.front().getLine()));
-
-    nodeChild->addChildBack(addNodeExpression(parseOperations(tokens)));
-    node->addChildBack(nodeChild);
+//    tokens.pop_front();
+//    tokens.pop_front();
+//    tokens.pop_back();
+//
+//    auto nodeChild = new Node(new nodePrint(tokens.front().getLine()));
+//
+//    nodeChild->addChildBack(addNodenode(parseOperations(tokens)));
+//    node->addChildBack(nodeChild);
 
 }
 
-std::list<Expression *> Parser::parseOperations(std::list<Token> tokens) {
-    std::list<Expression*> expressions;
+std::list<Node *> Parser::parseOperations(std::list<Token> tokens)
+{
+    std::list<Node*> nodes;
     for(auto token: toPostfix(tokens, "OPERATION", [](std::string type)
     {
         if (type == "*" || type == "/") { return 1; }
@@ -310,31 +232,31 @@ std::list<Expression *> Parser::parseOperations(std::list<Token> tokens) {
         if(type == "OPERATION") {
             auto op = token.getValue();
             if (op == "+") {
-                expressions.push_back(new ExpressionSum(token.getLine()));
-            } else if (op == "-") {
-                expressions.push_back(new ExpressionSub(token.getLine()));
-            } else if (op == "*") {
-                expressions.push_back(new ExpressionMul(token.getLine()));
-            } else if (op == "/") {
-                expressions.push_back(new ExpressionDiv(token.getLine()));
+                nodes.push_back(new NodeSum(token.getLine()));
+//            } else if (op == "-") {
+//                nodes.push_back(new NodeSub(token.getLine()));
+//            } else if (op == "*") {
+//                nodes.push_back(new nodeMul(token.getLine()));
+//            } else if (op == "/") {
+//                nodes.push_back(new nodeDiv(token.getLine()));
             }
         } else if(type == "NUMBER")
         {
-            expressions.push_back(new ExpressionVal(std::stoi(token.getValue()), token.getLine()));
+            nodes.push_back(new NodeVal(std::stoi(token.getValue()), token.getLine()));
         }
         else if(type == "VAR")
         {
-            expressions.push_back(new ExpressionVar(token.getValue(), token.getLine()));
+            nodes.push_back(new NodeVar(token.getValue(), token.getLine()));
         }
 
     }
 
-
-    return expressions;
+    return nodes;
 }
 
-std::list<Expression *> Parser::parseLogicOperations(std::list<Token> tokens) {
-    std::list<Expression*> expressions;
+std::list<Node *> Parser::parseLogicOperations(std::list<Token> tokens)
+{
+    std::list<Node*> nodes;
     for(auto token: toPostfix(tokens, "LOG_OPERATION", [](std::string type)
     {
         if (type == ">" || type == ">=" || type == "<" || type == "<=") { return 1; }
@@ -343,33 +265,35 @@ std::list<Expression *> Parser::parseLogicOperations(std::list<Token> tokens) {
     }))
     {
         auto type = token.getType();
-        if(type == "LOG_OPERATION") {
+        if(type == "LOG_OPERATION")
+        {
             auto op = token.getValue();
-            if (op == "<") {
-                expressions.push_back(new ExpressionSmaller(token.getLine()));
-            } else if (op == "<=") {
-                expressions.push_back(new ExpressionSmallerOrEq(token.getLine()));
-            } else if (op == "==") {
-                expressions.push_back(new ExpressionEq(token.getLine()));
-            } else if (op == ">") {
-                expressions.push_back(new ExpressionGreater(token.getLine()));
-            } else if (op == ">=") {
-                expressions.push_back(new ExpressionGreaterOrEq(token.getLine()));
-            }
-        } else if(type == "NUMBER")
-        {
-            expressions.push_back(new ExpressionVal(std::stoi(token.getValue()), token.getLine()));
-        }
-        else if(type == "VAR")
-        {
-            expressions.push_back(new ExpressionVar(token.getValue(), token.getLine()));
+//            if (op == "<") {
+//                nodes.push_back(new nodeSmaller(token.getLine()));
+//            } else if (op == "<=") {
+//                nodes.push_back(new nodeSmallerOrEq(token.getLine()));
+//            } else if (op == "==") {
+//                nodes.push_back(new nodeEq(token.getLine()));
+//            } else if (op == ">") {
+//                nodes.push_back(new nodeGreater(token.getLine()));
+//            } else if (op == ">=") {
+//                nodes.push_back(new nodeGreaterOrEq(token.getLine()));
+//            }
+//        } else if(type == "NUMBER")
+//        {
+//            nodes.push_back(new nodeVal(std::stoi(token.getValue()), token.getLine()));
+//        }
+//        else if(type == "VAR")
+//        {
+//            nodes.push_back(new nodeVar(token.getValue(), token.getLine()));
         }
     }
 
-    return expressions;
+    return nodes;
 }
 
-std::list<Token> Parser::toPostfix(std::list<Token> tokens, const std::string& typeOperation, const std::function<short(std::string type)>& m ) {
+std::list<Token> Parser::toPostfix(std::list<Token> tokens, const std::string& typeOperation, const std::function<short(std::string type)>& m )
+{
     std::list<Token> postfix;
     std::stack<Token> operators;
 
@@ -389,7 +313,7 @@ std::list<Token> Parser::toPostfix(std::list<Token> tokens, const std::string& t
             operators.pop();
         } else if (type == typeOperation)
         {
-            while ( !operators.empty() && ( operatorPriority(token.getValue()) >= m(operators.top().getValue()) ) ) {
+            while ( !operators.empty() && ( m(token.getValue()) >= m(operators.top().getValue()) ) ) {
                 postfix.push_back(operators.top());
                 operators.pop();
             }
@@ -408,13 +332,13 @@ std::list<Token> Parser::toPostfix(std::list<Token> tokens, const std::string& t
 }
 
 
-Node* Parser::addNodeExpression(std::list<Expression*> expressions)
+Node* Parser::addMakedTree(std::list<Node*> nodes)
 {
     std::stack<Node*> st;
 
-    for (const auto& exp: expressions) {
-        Node* node = new Node(exp);
-        if (node->getExpression()->isOperation()) {
+    for (const auto& node: nodes) {
+        //Node* node = new Node(exp);
+        if (node->isOperation()) {
             node->addChildFront(st.top());
             st.pop();
             node->addChildFront(st.top());

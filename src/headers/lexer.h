@@ -1,5 +1,4 @@
-#ifndef LEXER
-#define LEXER
+#pragma once
 
 
 #include <list>
@@ -23,5 +22,3 @@ public:
 
 	void print();
 };
-
-#endif

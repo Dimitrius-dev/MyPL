@@ -30,7 +30,7 @@ void Lexer::readFile(std::string path)
 {
     std::ifstream fin;
     fin.open(path);
-    if (!fin.is_open()) { throw "file does not exist"; }
+    if (!fin.is_open()) { throw std::string("file does not exist"); }
 
     int lineNum = 1;
     char ch;
@@ -46,12 +46,12 @@ void Lexer::readFile(std::string path)
             addToken(token.substr(0, token.size() - 1), lineNum);
             token = token[token.size() - 1];
         }
-
         if(ch == '\n') { lineNum++; }
-
     }
+    if(checkToken(token)){ addToken(token, lineNum); }
 
-    if(tokens.back().getType() != "END") { addToken("\\n", lineNum); }
+
+    if(tokens.back().getType() != "END") { addToken("\n", lineNum); }
 }
 
 bool Lexer::checkToken(std::string input)
@@ -68,6 +68,7 @@ bool Lexer::checkToken(std::string input)
 
 void Lexer::addToken(std::string input, int lineNum) {
 
+    std::cout<<"|"<<input<<"|"<<'\n';
 	for(auto lexem : lexems)
 	{
 		if(std::regex_match(input, lexem.second))

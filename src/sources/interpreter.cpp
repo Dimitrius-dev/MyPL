@@ -20,7 +20,7 @@ void Interpreter::execute(const Node* tree) {
         execute(node);
     }
 
-    tree->getExpression()->action(InterpreterArgs(variablesGlobal, variables, stack));
+    tree->action(InterpreterArgs(variablesGlobal, variables, stack));
 }
 
 std::stack<int>& Interpreter::getStack() {

@@ -1,21 +1,18 @@
 #include "node.h"
 
-Node::Node(const Expression* expression):
-        expression(expression) {}
 
-Node::Node(const Expression* expression, const std::list<Node*>& children):
-        expression(expression),
-        children(children) {}
+Node::Node(const NodeType type, const int lineNum):
+lineNum(lineNum), type(type)
+{}
 
 Node::~Node() {
-    delete expression;
     for (auto child: children) {
         delete child;
     }
 }
 
-ExpressionType Node::getType() {
-    return expression->getType();
+NodeType Node::getType() {
+    return type;
 }
 
 void Node::addChildFront(Node* child) {
@@ -30,6 +27,16 @@ std::list<Node *> Node::getChildren() const {
     return children;
 }
 
-const Expression* Node::getExpression() const {
-    return expression;
+bool Node::isOperation() const {
+    return(type == EXP_OP_SUM ||
+           type == EXP_OP_SUB ||
+           type == EXP_OP_MUL ||
+           type == EXP_OP_DIV ||
+           type == EXP_OP_EQUAL ||
+           type == EXP_OP_NOT_EQUAL ||
+           type == EXP_OP_GREATER_OR_EQUAL ||
+           type == EXP_OP_SMALLER_OR_EQUAL ||
+           type == EXP_OP_SMALLER ||
+           type == EXP_OP_GREATER
+    );
 }

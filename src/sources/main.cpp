@@ -5,7 +5,7 @@
 #include "parser.h"
 #include "interpreter.h"
 
-#include "expressionCodeBlock.h"
+#include "nodeCodeBlock.h"
 
 int main(int argc, char* argv[])
 {
@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 		lexer.readFile("../example.dsl");//(std::string)argv[1]
 		lexer.print();
 
-        Node *app = new Node(new ExpressionCodeBlock(0));
+        Node *app = new NodeCodeBlock(0);
 		Parser parser(app);
         parser.addTokens(lexer.getTokens());
 		Interpreter interpreter;

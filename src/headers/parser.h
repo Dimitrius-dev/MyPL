@@ -1,5 +1,4 @@
-#ifndef PARSER
-#define PARSER
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -28,20 +27,15 @@ public:
 
     void parsePrint(std::list<Token> tokens);
 
-    std::list<Expression*> parseOperations(std::list<Token> tokens);
+    std::list<Node *> parseOperations(std::list<Token> tokens);
 
-    std::list<Expression *> parseLogicOperations(std::list<Token> tokens);
-
-    short operatorPriority(std::string type);
-
-    short operatorLogicPriority(std::string type);
+    std::list<Node *> parseLogicOperations(std::list<Token> tokens);
 
     std::list<Token> toPostfix(std::list<Token> tokens, const std::string& typeOperation, const std::function<short(std::string type)>& m);
 
     std::list<Token> toLogicPostfix(std::list<Token> tokens);
 
-    Node* addNodeExpression(std::list<Expression*> expressions);
+    Node* addMakedTree(std::list<Node*> nodes);
 
     void parseLine(std::list<Token> &tokens);
 };
-#endif
