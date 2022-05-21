@@ -16,13 +16,13 @@ int main(int argc, char* argv[])
 		lexer.readFile("../example.dsl");//(std::string)argv[1]
 		lexer.print();
 
-        Node *app;
-        app = new NodeCodeBlock(0);
+        	Node *app;
+        	app = new NodeCodeBlock(0);
 		Parser parser(app);
-        parser.addTokens(lexer.getTokens());
+        	parser.addTokens(lexer.getTokens());
 
 		Interpreter interpreter(new InterpreterArgs());
-        interpreter.execute(app);
+        	interpreter.execute(app);
 
 	}
 	catch(std::string error)

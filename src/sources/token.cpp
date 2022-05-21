@@ -23,13 +23,3 @@ void Token::setValue(std::string value)
 int Token::getLine() const {
     return lineNum;
 }
-
-/*
-Token& Token::operator=(const Token& from)
-{
-	type_ = from.getType();
-	regexLine_ = from.getRegexLine();
-	value_ = from.getValue();
-	return *this;
-}
-*/

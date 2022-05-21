@@ -5,12 +5,12 @@
 
 Lexer::Lexer()
 : lexems({
-     {"WHILE", std::regex("while")},
-     {"FOR", std::regex("for")},
-     {"IF", std::regex("if")},
-     {"PRINT", std::regex("print")},
+	{"WHILE", std::regex("while")},
+	{"FOR", std::regex("for")},
+	{"IF", std::regex("if")},
+	{"PRINT", std::regex("print")},
 
-     {"VAR", std::regex("[a-z][A-Za-z0-9]*")},
+	{"VAR", std::regex("[a-z][A-Za-z0-9]*")},
 	{"ASSIGN", std::regex("\\=")},
 	{"NUMBER", std::regex("[-]?[1-9]+[0-9]*|(0)")},
 	{"OPERATION", std::regex(R"(\+|\-|\/|\*)")},

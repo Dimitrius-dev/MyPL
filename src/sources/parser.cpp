@@ -31,10 +31,6 @@ Parser::Parser(Node* node)
 {
 }
 
-//в конце вызвает compare и передает конечные строки
-//циклом разбиваю токены на строки токенов
-// например if - становится одной единой строкой
-
 void Parser::addTokens(std::list<Token> tokens)
 {
     std::list<Token> tokenLine;

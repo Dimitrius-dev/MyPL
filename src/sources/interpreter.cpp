@@ -18,8 +18,3 @@ void Interpreter::execute(const Node* tree)
 
     tree->action(args);
 }
-
-//std::stack<int>& Interpreter::getStack()
-//{
-//    return stack;
-//}
