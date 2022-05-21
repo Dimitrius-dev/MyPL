@@ -2,7 +2,7 @@
 #include "interpreter.h"
 
 NodeIf::NodeIf(const int& lineNum, Node* nodeCondition, Node* nodeAction):
-Node(EXP_IF, lineNum), nodeCondition(nodeCondition), nodeAction(nodeAction) {}
+        Node(NODE_IF, lineNum), nodeCondition(nodeCondition), nodeAction(nodeAction) {}
 
 void NodeIf::action(InterpreterArgs* args) const {
 

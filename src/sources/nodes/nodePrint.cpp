@@ -3,7 +3,7 @@
 #include <iostream>
 
 NodePrint::NodePrint(const int& lineNum):
-Node(EXP_OP_PRINT, lineNum) {}
+Node(NODE_PRINT, lineNum) {}
 
 
 void NodePrint::action(InterpreterArgs* args) const {

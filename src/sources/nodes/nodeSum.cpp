@@ -1,7 +1,7 @@
 #include "nodeSum.h"
 
 NodeSum::NodeSum(const int& lineNum):
-Node(EXP_OP_SUM, lineNum) {}
+Node(NODE_SUM, lineNum) {}
 
 void NodeSum::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

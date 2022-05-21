@@ -1,7 +1,7 @@
 #include "nodeGreater.h"
 
 NodeGreater::NodeGreater(const int& lineNum):
-Node(EXP_OP_GREATER, lineNum) {}
+Node(NODE_GREATER, lineNum) {}
 
 void NodeGreater::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

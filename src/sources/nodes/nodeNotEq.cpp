@@ -1,7 +1,7 @@
 #include "nodeNotEq.h"
 
 NodeNotEq::NodeNotEq(const int& lineNum):
-Node(EXP_OP_NOT_EQUAL, lineNum) {}
+Node(NODE_NOT_EQUAL, lineNum) {}
 
 void NodeNotEq::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

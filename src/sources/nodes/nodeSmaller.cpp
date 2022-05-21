@@ -1,7 +1,7 @@
 #include "nodeSmaller.h"
 
 NodeSmaller::NodeSmaller(const int& lineNum):
-Node(EXP_OP_SMALLER, lineNum) {}
+Node(NODE_SMALLER, lineNum) {}
 
 void NodeSmaller::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

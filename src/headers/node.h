@@ -5,31 +5,31 @@
 #include "interpreterArgs.h"
 
 enum NodeType {
-    EXP_VAR,
-    EXP_VAL,
+    NODE_VAR,
+    NODE_VAL,
 
-    EXP_OP_MUL,
-    EXP_OP_DIV,
-    EXP_OP_SUM,
-    EXP_OP_SUB,
+    NODE_MUL,
+    NODE_DIV,
+    NODE_SUM,
+    NODE_SUB,
 
-    EXP_OP_SMALLER,
-    EXP_OP_SMALLER_OR_EQUAL,
-    EXP_OP_GREATER,
-    EXP_OP_GREATER_OR_EQUAL,
-    EXP_OP_EQUAL,
-    EXP_OP_NOT_EQUAL,
+    NODE_SMALLER,
+    NODE_SMALLER_OR_EQUAL,
+    NODE_GREATER,
+    NODE_GREATER_OR_EQUAL,
+    NODE_EQUAL,
+    NODE_NOT_EQUAL,
 
-    EXP_OP_ASSIGN_VAR,
+    NODE_ASSIGN_VAR,
 
-    EXP_OP_PRINT,
+    NODE_PRINT,
 
-    EXP_IF,
+    NODE_IF,
 
-    EXP_LOOP_WHILE,
-    EXP_LOOP_FOR,
+    NODE_WHILE,
+    NODE_FOR,
 
-    EXP_CODE_BLOCK
+    NODE_BLOCK
 };
 
 class Node {

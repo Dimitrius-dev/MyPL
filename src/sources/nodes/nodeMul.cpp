@@ -1,7 +1,7 @@
 #include "nodeMul.h"
 
 NodeMul::NodeMul(const int& lineNum):
-Node(EXP_OP_MUL, lineNum) {}
+Node(NODE_MUL, lineNum) {}
 
 void NodeMul::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

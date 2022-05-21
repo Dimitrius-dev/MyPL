@@ -1,7 +1,7 @@
 #include "nodeEq.h"
 
 NodeEq::NodeEq(const int& lineNum):
-Node(EXP_OP_EQUAL, lineNum) {}
+Node(NODE_EQUAL, lineNum) {}
 
 void NodeEq::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

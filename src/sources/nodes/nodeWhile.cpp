@@ -4,7 +4,7 @@
 #include <iostream>
 
 NodeWhile::NodeWhile(const int& lineNum, Node* nodeCondition, Node* nodeAction):
-Node(EXP_LOOP_WHILE, lineNum), nodeCondition(nodeCondition), nodeAction(nodeAction) {}
+        Node(NODE_WHILE, lineNum), nodeCondition(nodeCondition), nodeAction(nodeAction) {}
 
 void NodeWhile::action(InterpreterArgs* args) const {
 

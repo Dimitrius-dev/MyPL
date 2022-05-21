@@ -1,7 +1,7 @@
 #include "nodeDiv.h"
 
 NodeDiv::NodeDiv(const int& lineNum):
-Node(EXP_OP_DIV, lineNum) {}
+Node(NODE_DIV, lineNum) {}
 
 void NodeDiv::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

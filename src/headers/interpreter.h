@@ -19,7 +19,4 @@ public:
 
     void execute(const Node*);
 
-    //std::stack<int>& getStack();
-
-    //Interpreter(InterpreterArgs args);
 };

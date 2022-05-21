@@ -1,7 +1,7 @@
 #include "nodeSmallerOrEq.h"
 
 NodeSmallerOrEq::NodeSmallerOrEq(const int& lineNum):
-Node(EXP_OP_SMALLER_OR_EQUAL, lineNum) {}
+Node(NODE_SMALLER_OR_EQUAL, lineNum) {}
 
 void NodeSmallerOrEq::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

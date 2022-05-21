@@ -1,7 +1,7 @@
 #include "nodeGreaterOrEq.h"
 
 NodeGreaterOrEq::NodeGreaterOrEq(const int& lineNum):
-Node(EXP_OP_GREATER_OR_EQUAL, lineNum) {}
+Node(NODE_GREATER_OR_EQUAL, lineNum) {}
 
 void NodeGreaterOrEq::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

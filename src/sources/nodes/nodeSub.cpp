@@ -1,7 +1,7 @@
 #include "nodeSub.h"
 
 NodeSub::NodeSub(const int& lineNum):
-Node(EXP_OP_SUM, lineNum) {}
+Node(NODE_SUM, lineNum) {}
 
 void NodeSub::action(InterpreterArgs* args) const {
     if (args->getStack().size() >= 2) {

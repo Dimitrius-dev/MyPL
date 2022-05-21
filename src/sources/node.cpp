@@ -28,15 +28,15 @@ std::list<Node *> Node::getChildren() const {
 }
 
 bool Node::isOperation() const {
-    return(type == EXP_OP_SUM ||
-           type == EXP_OP_SUB ||
-           type == EXP_OP_MUL ||
-           type == EXP_OP_DIV ||
-           type == EXP_OP_EQUAL ||
-           type == EXP_OP_NOT_EQUAL ||
-           type == EXP_OP_GREATER_OR_EQUAL ||
-           type == EXP_OP_SMALLER_OR_EQUAL ||
-           type == EXP_OP_SMALLER ||
-           type == EXP_OP_GREATER
+    return(type == NODE_SUM ||
+           type == NODE_SUB ||
+           type == NODE_MUL ||
+           type == NODE_DIV ||
+           type == NODE_EQUAL ||
+           type == NODE_NOT_EQUAL ||
+           type == NODE_GREATER_OR_EQUAL ||
+           type == NODE_SMALLER_OR_EQUAL ||
+           type == NODE_SMALLER ||
+            type == NODE_GREATER
     );
 }

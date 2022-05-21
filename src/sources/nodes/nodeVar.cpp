@@ -4,7 +4,7 @@
 #include <iostream>
 
 NodeVar::NodeVar(std::string name, const int& lineNum)
-: Node(EXP_VAR, lineNum), name(name) {}
+: Node(NODE_VAR, lineNum), name(name) {}
 
 void NodeVar::action(InterpreterArgs* args) const {
     if (!callVariableFrom(args->getVariables(), args->getStack() ) ) {
