@@ -3,9 +3,8 @@
 NodeAssignVar::NodeAssignVar(std::string name, const int& lineNum):
 Node(EXP_OP_ASSIGN_VAR, lineNum), name(name) {}
 
-void NodeAssignVar::action(const InterpreterArgs& args) const {
-    args.variables->insert_or_assign(name, args.stack.top());
+void NodeAssignVar::action(InterpreterArgs* args) const {
+    args->getVariables().insert_or_assign(name, args->getStack().top());
 
-    std::cout<<args.stack.top()<<'\n';
-    args.stack.pop();
+    args->getStack().pop();
 }

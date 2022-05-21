@@ -119,6 +119,90 @@ build CMakeFiles/MyPL.dir/src/sources/nodes/nodeSum.cpp.o: CXX_COMPILER__MyPL_De
   OBJECT_DIR = CMakeFiles/MyPL.dir
   OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
 
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeSub.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeSub.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeSub.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeMul.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeMul.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeMul.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeDiv.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeDiv.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeDiv.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodePrint.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodePrint.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodePrint.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeIf.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeIf.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeIf.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeSmaller.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeSmaller.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeSmaller.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeSmallerOrEq.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeSmallerOrEq.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeSmallerOrEq.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeGreater.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeGreater.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeGreater.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeGreaterOrEq.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeGreaterOrEq.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeGreaterOrEq.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeEq.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeEq.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeEq.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeNotEq.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeNotEq.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeNotEq.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
+build CMakeFiles/MyPL.dir/src/sources/nodes/nodeWhile.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/nodes/nodeWhile.cpp || cmake_object_order_depends_target_MyPL
+  DEP_FILE = CMakeFiles/MyPL.dir/src/sources/nodes/nodeWhile.cpp.o.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I/home/notroot/Programing/prog/c++/MyPL/src -I/home/notroot/Programing/prog/c++/MyPL/src/headers -I/home/notroot/Programing/prog/c++/MyPL/src/sources -I/home/notroot/Programing/prog/c++/MyPL/src/headers/nodes -I/home/notroot/Programing/prog/c++/MyPL/src/sources/nodes
+  OBJECT_DIR = CMakeFiles/MyPL.dir
+  OBJECT_FILE_DIR = CMakeFiles/MyPL.dir/src/sources/nodes
+
 build CMakeFiles/MyPL.dir/src/sources/interpreterArgs.cpp.o: CXX_COMPILER__MyPL_Debug /home/notroot/Programing/prog/c++/MyPL/src/sources/interpreterArgs.cpp || cmake_object_order_depends_target_MyPL
   DEP_FILE = CMakeFiles/MyPL.dir/src/sources/interpreterArgs.cpp.o.d
   FLAGS = -g -std=gnu++17
@@ -141,7 +225,7 @@ build CMakeFiles/MyPL.dir/src/sources/interpreter.cpp.o: CXX_COMPILER__MyPL_Debu
 #############################################
 # Link the executable MyPL
 
-build MyPL: CXX_EXECUTABLE_LINKER__MyPL_Debug CMakeFiles/MyPL.dir/src/sources/main.cpp.o CMakeFiles/MyPL.dir/src/sources/token.cpp.o CMakeFiles/MyPL.dir/src/sources/lexer.cpp.o CMakeFiles/MyPL.dir/src/sources/node.cpp.o CMakeFiles/MyPL.dir/src/sources/parser.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeCodeBlock.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeAssignVar.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeVar.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeVal.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeSum.cpp.o CMakeFiles/MyPL.dir/src/sources/interpreterArgs.cpp.o CMakeFiles/MyPL.dir/src/sources/interpreter.cpp.o
+build MyPL: CXX_EXECUTABLE_LINKER__MyPL_Debug CMakeFiles/MyPL.dir/src/sources/main.cpp.o CMakeFiles/MyPL.dir/src/sources/token.cpp.o CMakeFiles/MyPL.dir/src/sources/lexer.cpp.o CMakeFiles/MyPL.dir/src/sources/node.cpp.o CMakeFiles/MyPL.dir/src/sources/parser.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeCodeBlock.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeAssignVar.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeVar.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeVal.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeSum.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeSub.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeMul.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeDiv.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodePrint.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeIf.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeSmaller.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeSmallerOrEq.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeGreater.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeGreaterOrEq.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeEq.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeNotEq.cpp.o CMakeFiles/MyPL.dir/src/sources/nodes/nodeWhile.cpp.o CMakeFiles/MyPL.dir/src/sources/interpreterArgs.cpp.o CMakeFiles/MyPL.dir/src/sources/interpreter.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/MyPL.dir
   POST_BUILD = :

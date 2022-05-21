@@ -1,9 +1,27 @@
 #include "parser.h"
 
 #include "node.h"
+
 #include "nodeSum.h"
+#include "nodeSub.h"
+#include "nodeMul.h"
+#include "nodeDiv.h"
+
+#include "nodePrint.h"
+
 #include "nodeVar.h"
 #include "nodeVal.h"
+
+#include "nodeIf.h"
+#include "nodeSmaller.h"
+#include "nodeSmallerOrEq.h"
+#include "nodeGreater.h"
+#include "nodeGreaterOrEq.h"
+#include "nodeEq.h"
+#include "nodeNotEq.h"
+
+#include "nodeWhile.h"
+
 #include "nodeCodeBlock.h"
 #include "nodeAssignVar.h"
 
@@ -130,91 +148,84 @@ void Parser::parseFor(std::list<Token> tokens)
 
 void Parser::parseIf(std::list<Token> tokens)
 {
+    tokens.pop_front();//remove if
+    tokens.pop_front();//remove (
 
-//    tokens.pop_front();//remove if
-//    tokens.pop_front();//remove (
-//
-//    std::list<Token> conditionTokens;
-//    int amount = 0;
-//    for (auto token : tokens)
-//    {
-//        if(token.getType() != "LFBR")//until token '{'
-//        {
-//            amount++;
-//            conditionTokens.push_back(token);
-//        }
-//        else
-//        {
-//            break;
-//        }
-//    }
-//    conditionTokens.pop_back();//remove last token ')'
-//
-//    for(int i = 0; i < amount; i++)
-//    {
-//        tokens.pop_front();
-//    }
-//
-//    tokens.pop_front();//remove token '{'
-//    tokens.pop_back();//remove token '}'
-//
-//    auto nodeCondition = addNodenode(parseLogicOperations(conditionTokens));
-//    auto nodeBlock = new Node(new nodeCodeBlock(tokens.front().getLine()));
-//
-//    Parser parser(nodeBlock);
-//    parser.addTokens(tokens);
-//
-//    node->addChildBack(new Node(new nodeIf(nodeCondition, nodeBlock, tokens.front().getLine())));
+    std::list<Token> conditionTokens;
+    int amount = 0;
+    for (auto token : tokens)
+    {
+        if(token.getType() == "LFBR")//until token '{'
+        {
+            break;
+        }
+        amount++;
+        conditionTokens.push_back(token);
+    }
+    conditionTokens.pop_back();//remove last token ')'
+
+    for(int i = 0; i < amount; i++)
+    {
+        tokens.pop_front();
+    }
+
+    tokens.pop_front();//remove token '{'
+    tokens.pop_back();//remove token '}'
+
+    auto nodeCondition = addMakedTree(parseLogicOperations(conditionTokens));
+    auto nodeBlock = new NodeCodeBlock(tokens.front().getLine());
+
+    Parser parser(nodeBlock);
+    parser.addTokens(tokens);
+
+    node->addChildBack(new NodeIf(tokens.front().getLine(), nodeCondition, nodeBlock));
 }
 
 void Parser::parseWhile(std::list<Token> tokens)
 {
-//    tokens.pop_front();//remove if
-//    tokens.pop_front();//remove (
-//
-//    std::list<Token> conditionTokens;
-//    int amount = 0;
-//    for (auto token : tokens)
-//    {
-//        if(token.getType() != "LFBR")//until token '{'
-//        {
-//            amount++;
-//            conditionTokens.push_back(token);
-//        }
-//        else
-//        {
-//            break;
-//        }
-//    }
-//    conditionTokens.pop_back();//remove last token ')'
-//
-//    for(int i = 0; i < amount; i++)
-//    {
-//        tokens.pop_front();
-//    }
-//
-//    tokens.pop_front();//remove token '{'
-//    tokens.pop_back();//remove token '}'
-//
-//    auto nodeCondition = addNodenode(parseLogicOperations(conditionTokens));
-//    auto nodeBlock = new Node(new nodeCodeBlock(tokens.front().getLine()));
-//
-//    Parser parser(nodeBlock);
-//    parser.addTokens(tokens);
-//
-//    node->addChildBack(new Node(new nodeWhile(nodeCondition, nodeBlock, tokens.front().getLine())));
+    tokens.pop_front();//remove if
+    tokens.pop_front();//remove (
+
+    std::list<Token> conditionTokens;
+    int amount = 0;
+    for (auto token : tokens)
+    {
+        if(token.getType() == "LFBR")//until token '{'
+        {
+            break;
+        }
+        amount++;
+        conditionTokens.push_back(token);
+    }
+    conditionTokens.pop_back();//remove last token ')'
+
+    for(int i = 0; i < amount; i++)
+    {
+        tokens.pop_front();
+    }
+
+    tokens.pop_front();//remove token '{'
+    tokens.pop_back();//remove token '}'
+
+    auto nodeCondition = addMakedTree(parseLogicOperations(conditionTokens));
+    auto nodeBlock = new NodeCodeBlock(tokens.front().getLine());
+
+    Parser parser(nodeBlock);
+    parser.addTokens(tokens);
+
+    node->addChildBack(new NodeWhile(tokens.front().getLine(), nodeCondition, nodeBlock));
 }
 
 void Parser::parsePrint(std::list<Token> tokens)
 {
-//    tokens.pop_front();
-//    tokens.pop_front();
-//    tokens.pop_back();
-//
-//    auto nodeChild = new Node(new nodePrint(tokens.front().getLine()));
-//
-//    nodeChild->addChildBack(addNodenode(parseOperations(tokens)));
-//    node->addChildBack(nodeChild);
+    tokens.pop_front();
+    tokens.pop_front();
+    tokens.pop_back();
+
+    auto nodeChild = new NodePrint(tokens.front().getLine());
+
+    nodeChild->addChildBack(addMakedTree(parseOperations(tokens)));
+    node->addChildBack(nodeChild);
 
 }
 
@@ -233,12 +244,12 @@ std::list<Node *> Parser::parseOperations(std::list<Token> tokens)
             auto op = token.getValue();
             if (op == "+") {
                 nodes.push_back(new NodeSum(token.getLine()));
-//            } else if (op == "-") {
-//                nodes.push_back(new NodeSub(token.getLine()));
-//            } else if (op == "*") {
-//                nodes.push_back(new nodeMul(token.getLine()));
-//            } else if (op == "/") {
-//                nodes.push_back(new nodeDiv(token.getLine()));
+            } else if (op == "-") {
+                nodes.push_back(new NodeSub(token.getLine()));
+            } else if (op == "*") {
+                nodes.push_back(new NodeMul(token.getLine()));
+            } else if (op == "/") {
+                nodes.push_back(new NodeDiv(token.getLine()));
             }
         } else if(type == "NUMBER")
         {
@@ -268,24 +279,26 @@ std::list<Node *> Parser::parseLogicOperations(std::list<Token> tokens)
         if(type == "LOG_OPERATION")
         {
             auto op = token.getValue();
-//            if (op == "<") {
-//                nodes.push_back(new nodeSmaller(token.getLine()));
-//            } else if (op == "<=") {
-//                nodes.push_back(new nodeSmallerOrEq(token.getLine()));
-//            } else if (op == "==") {
-//                nodes.push_back(new nodeEq(token.getLine()));
-//            } else if (op == ">") {
-//                nodes.push_back(new nodeGreater(token.getLine()));
-//            } else if (op == ">=") {
-//                nodes.push_back(new nodeGreaterOrEq(token.getLine()));
-//            }
-//        } else if(type == "NUMBER")
-//        {
-//            nodes.push_back(new nodeVal(std::stoi(token.getValue()), token.getLine()));
-//        }
-//        else if(type == "VAR")
-//        {
-//            nodes.push_back(new nodeVar(token.getValue(), token.getLine()));
+            if (op == "<") {
+                nodes.push_back(new NodeSmaller(token.getLine()));
+            } else if (op == "<=") {
+                nodes.push_back(new NodeSmallerOrEq(token.getLine()));
+            } else if (op == "==") {
+                nodes.push_back(new NodeEq(token.getLine()));
+            } else if (op == ">") {
+                nodes.push_back(new NodeGreater(token.getLine()));
+            } else if (op == ">=") {
+                nodes.push_back(new NodeGreaterOrEq(token.getLine()));
+            } else if (op == "!=") {
+                nodes.push_back(new NodeNotEq(token.getLine()));
+            }
+        } else if(type == "NUMBER")
+        {
+            nodes.push_back(new NodeVal(std::stoi(token.getValue()), token.getLine()));
+        }
+        else if(type == "VAR")
+        {
+            nodes.push_back(new NodeVar(token.getValue(), token.getLine()));
         }
     }
 

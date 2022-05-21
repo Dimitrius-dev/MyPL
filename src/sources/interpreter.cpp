@@ -1,28 +1,25 @@
 #include "interpreter.h"
 #include "node.h"
 
-Interpreter::Interpreter() {
-    variables = new std::map<std::string, int>();
-}
 
-Interpreter::Interpreter(
-        const std::list<std::map<std::string, int>*>& variablesGlobal
-):
-variablesGlobal(variablesGlobal) {
-    variables = new std::map<std::string, int>();
-}
+Interpreter::Interpreter(InterpreterArgs* args)
+: args(args)
+{}
 
-Interpreter::~Interpreter() {
-}
+Interpreter::~Interpreter()
+{}
 
-void Interpreter::execute(const Node* tree) {
-    for (auto node: tree->getChildren()) {
+void Interpreter::execute(const Node* tree)
+{
+    for (auto node: tree->getChildren())
+    {
         execute(node);
     }
 
-    tree->action(InterpreterArgs(variablesGlobal, variables, stack));
+    tree->action(args);
 }
 
-std::stack<int>& Interpreter::getStack() {
-    return stack;
-}
+//std::stack<int>& Interpreter::getStack()
+//{
+//    return stack;
+//}

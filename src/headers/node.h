@@ -51,7 +51,7 @@ public:
     //Expression(const ExpressionType& type, const int& lineNum);
 
     NodeType getType() const;
-    virtual void action(const InterpreterArgs& args) const = 0;
+    virtual void action(InterpreterArgs* args) const = 0;
 
     bool isOperation() const;
 

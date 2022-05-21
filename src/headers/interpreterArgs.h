@@ -4,17 +4,12 @@
 #include <map>
 #include <stack>
 
-class Node;
-
-struct InterpreterArgs {
-    std::list<std::map<std::string, int>*>& variablesGlobal;
-    std::map<std::string, int>* variables;
-
-    std::stack<int>& stack;
-
-    InterpreterArgs(
-            std::list<std::map<std::string, int>*>& variablesGlobal,
-            std::map<std::string, int>* variables,
-            std::stack<int>& stack
-    );
+class InterpreterArgs final{
+private:
+    std::map<std::string, int> variables;
+    std::stack<int> stack;
+public:
+    InterpreterArgs();
+    std::map<std::string, int>& getVariables();
+    std::stack<int>& getStack();
 };

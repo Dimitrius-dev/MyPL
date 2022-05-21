@@ -8,7 +8,7 @@ class NodeAssignVar final: public Node {
 public:
     NodeAssignVar(std::string name, const int& lineNum);
 
-    void action(const InterpreterArgs& args) const override;
+    void action(InterpreterArgs* args) const override;
 private:
     std::string name;
 };

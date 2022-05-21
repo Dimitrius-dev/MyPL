@@ -41,6 +41,42 @@ add_executable(
         src/headers/nodes/nodeSum.h
         src/sources/nodes/nodeSum.cpp
 
+        src/headers/nodes/nodeSub.h
+        src/sources/nodes/nodeSub.cpp
+
+        src/headers/nodes/nodeMul.h
+        src/sources/nodes/nodeMul.cpp
+
+        src/headers/nodes/nodeDiv.h
+        src/sources/nodes/nodeDiv.cpp
+
+        src/headers/nodes/nodePrint.h
+        src/sources/nodes/nodePrint.cpp
+
+        src/headers/nodes/nodeIf.h
+        src/sources/nodes/nodeIf.cpp
+
+        src/headers/nodes/nodeSmaller.h
+        src/sources/nodes/nodeSmaller.cpp
+
+        src/headers/nodes/nodeSmallerOrEq.h
+        src/sources/nodes/nodeSmallerOrEq.cpp
+
+        src/headers/nodes/nodeGreater.h
+        src/sources/nodes/nodeGreater.cpp
+
+        src/headers/nodes/nodeGreaterOrEq.h
+        src/sources/nodes/nodeGreaterOrEq.cpp
+
+        src/headers/nodes/nodeEq.h
+        src/sources/nodes/nodeEq.cpp
+
+        src/headers/nodes/nodeNotEq.h
+        src/sources/nodes/nodeNotEq.cpp
+
+        src/headers/nodes/nodeWhile.h
+        src/sources/nodes/nodeWhile.cpp
+
         src/headers/interpreterArgs.h
         src/sources/interpreterArgs.cpp
 

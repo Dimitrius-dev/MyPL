@@ -6,7 +6,7 @@ class NodeVal final: public Node {
 public:
     NodeVal(int val, const int& lineNum);
 
-    void action(const InterpreterArgs& args) const override;
+    void action(InterpreterArgs* args) const override;
 private:
     int val;
 };

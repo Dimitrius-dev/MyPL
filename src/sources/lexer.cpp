@@ -12,9 +12,9 @@ Lexer::Lexer()
 
      {"VAR", std::regex("[a-z][A-Za-z0-9]*")},
 	{"ASSIGN", std::regex("\\=")},
-	{"NUMBER", std::regex("[-]?[1-9]+[0-9]*")},
+	{"NUMBER", std::regex("[-]?[1-9]+[0-9]*|(0)")},
 	{"OPERATION", std::regex(R"(\+|\-|\/|\*)")},
-	{"LOG_OPERATION", std::regex(R"(\=\=|\>\=|\<\=|\<|\>)")},
+	{"LOG_OPERATION", std::regex(R"(\=\=|\>\=|\<\=|\<|\>|\!\=)")},
 
 	{"LBR", std::regex("\\(")},
 	{"RBR", std::regex("\\)")},
