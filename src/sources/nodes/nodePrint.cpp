@@ -12,6 +12,6 @@ void NodePrint::action(InterpreterArgs* args) const {
         std::cout<<args->getStack().top()<<'\n';
         //args.stack.pop();
     } else {
-        throw std::string("there is no value");
+        throw std::string("there is no value on line: ") + std::to_string(lineNum);
     }
 }

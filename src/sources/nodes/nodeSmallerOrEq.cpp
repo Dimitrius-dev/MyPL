@@ -13,6 +13,6 @@ void NodeSmallerOrEq::action(InterpreterArgs* args) const {
         args->getStack().push( (arg1 <= arg2) ? 1 : 0 );
 
     } else {
-        throw std::string("function doesn't return any value");
+        throw std::string("function doesn't return any value on line: ") + std::to_string(lineNum);
     }
 }
