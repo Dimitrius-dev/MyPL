@@ -23,6 +23,7 @@ enum NodeType {
     NODE_ASSIGN_VAR,
 
     NODE_PRINT,
+    NODE_LOG,
 
     NODE_IF,
 

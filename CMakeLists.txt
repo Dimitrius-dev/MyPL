@@ -53,6 +53,9 @@ add_executable(
         src/headers/nodes/nodePrint.h
         src/sources/nodes/nodePrint.cpp
 
+        src/headers/nodes/nodeLog.h
+        src/sources/nodes/nodeLog.cpp
+
         src/headers/nodes/nodeIf.h
         src/sources/nodes/nodeIf.cpp
 

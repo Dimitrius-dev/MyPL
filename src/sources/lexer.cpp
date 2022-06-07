@@ -5,14 +5,15 @@
 
 Lexer::Lexer()
 : lexems({
-	{"WHILE", std::regex("while")},
-	{"FOR", std::regex("for")},
-	{"IF", std::regex("if")},
-	{"PRINT", std::regex("print")},
+     {"WHILE", std::regex("while")},
+     {"FOR", std::regex("for")},
+     {"IF", std::regex("if")},
+     {"PRINT", std::regex("print")},
+     {"LOG", std::regex("log")},
 
-	{"VAR", std::regex("[a-z][A-Za-z0-9]*")},
+     {"VAR", std::regex("[a-z][A-Za-z0-9]*")},
 	{"ASSIGN", std::regex("\\=")},
-	{"NUMBER", std::regex("[-]?[1-9]+[0-9]*|(0)")},
+	{"NUMBER", std::regex("[1-9]+[0-9]*|(0)|/([-]?[1-9]+[0-9]*/)")},
 	{"OPERATION", std::regex(R"(\+|\-|\/|\*)")},
 	{"LOG_OPERATION", std::regex(R"(\=\=|\>\=|\<\=|\<|\>|\!\=)")},
 
@@ -68,7 +69,8 @@ bool Lexer::checkToken(std::string input)
 
 void Lexer::addToken(std::string input, int lineNum) {
 
-    std::cout<<"|"<<input<<"|"<<'\n';
+    if(debug){ std::cout<<"|"<<input<<"|"<<'\n'; }
+
 	for(auto lexem : lexems)
 	{
 		if(std::regex_match(input, lexem.second))
@@ -82,9 +84,8 @@ void Lexer::addToken(std::string input, int lineNum) {
 
 }
 
-void Lexer::print()
+void Lexer::print() const
 {
-	
 	for(auto token : tokens) {
 		std::cout<<"type:|"<<'\t'<<token.getType()<<'\t'<<"|value:|"<<token.getValue()<<'\t'<<"|line:|"<<token.getLine()<<"|\n";
 	}
@@ -92,6 +93,8 @@ void Lexer::print()
 }
 
 std::list<Token> Lexer::getTokens() const{
+    if(debug){ this->print(); }
+
     return tokens;
 }
 

@@ -8,6 +8,7 @@
 #include "nodeDiv.h"
 
 #include "nodePrint.h"
+#include "nodeLog.h"
 
 #include "nodeVar.h"
 #include "nodeVal.h"
@@ -30,6 +31,10 @@ Parser::Parser(Node* node)
 : node(node)
 {
 }
+
+//в конце вызвает compare и передает конечные строки
+//циклом разбиваю токены на строки токенов
+// например if - становится одной единой строкой
 
 void Parser::addTokens(std::list<Token> tokens)
 {
@@ -87,11 +92,11 @@ void Parser::addTokens(std::list<Token> tokens)
 
 
 void Parser::parseLine(std::list<Token>& tokens) {
-    for (auto token : tokens )
+    if(debug)
     {
-        std::cout<<token.getType()<<" ";
+        for (auto token : tokens ) { std::cout<<token.getType()<<" "; }
+        std::cout<<'\n';
     }
-    std::cout<<'\n';
 
     const auto & type = tokens.front().getType();
 
@@ -110,6 +115,9 @@ void Parser::parseLine(std::list<Token>& tokens) {
     } else if(type == "PRINT")
     {
         parsePrint(tokens);
+    } else if(type == "LOG")
+    {
+        parseLog(tokens);
     }
 
 }
@@ -135,12 +143,9 @@ void Parser::parseVarAssignment(std::list<Token> tokens)
 
 }
 
+void Parser::parseFor(std::list<Token> tokens){}
 
 
-void Parser::parseFor(std::list<Token> tokens)
-{
-
-}
 
 void Parser::parseIf(std::list<Token> tokens)
 {
@@ -172,6 +177,7 @@ void Parser::parseIf(std::list<Token> tokens)
     auto nodeBlock = new NodeCodeBlock(tokens.front().getLine());
 
     Parser parser(nodeBlock);
+    if(this->debug){ parser.debug = true; }
     parser.addTokens(tokens);
 
     node->addChildBack(new NodeIf(tokens.front().getLine(), nodeCondition, nodeBlock));
@@ -220,7 +226,28 @@ void Parser::parsePrint(std::list<Token> tokens)
 
     auto nodeChild = new NodePrint(tokens.front().getLine());
 
-    nodeChild->addChildBack(addMakedTree(parseOperations(tokens)));
+    if( !tokens.empty() )
+    {
+        nodeChild->addChildBack(addMakedTree(parseOperations(tokens)));
+    }
+
+    node->addChildBack(nodeChild);
+
+}
+
+void Parser::parseLog(std::list<Token> tokens)
+{
+    tokens.pop_front();
+    tokens.pop_front();
+    tokens.pop_back();
+
+    auto nodeChild = new NodeLog(tokens.front().getLine());
+
+    if( !tokens.empty() )
+    {
+        nodeChild->addChildBack(addMakedTree(parseOperations(tokens)));
+    }
+
     node->addChildBack(nodeChild);
 
 }

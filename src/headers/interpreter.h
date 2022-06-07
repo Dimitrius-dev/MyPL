@@ -19,4 +19,6 @@ public:
 
     void execute(const Node*);
 
+public:
+    bool debug = false;
 };

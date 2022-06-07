@@ -11,18 +11,20 @@ int main(int argc, char* argv[])
 {
 
 	try
-	{
+    {
 		Lexer lexer;
+        lexer.debug = false;
 		lexer.readFile("../example.dsl");//(std::string)argv[1]
-		lexer.print();
+		//lexer.print();
 
-        	Node *app;
-        	app = new NodeCodeBlock(0);
+        Node *app;
+        app = new NodeCodeBlock(0);
 		Parser parser(app);
-        	parser.addTokens(lexer.getTokens());
+        parser.debug = false;
+        parser.addTokens(lexer.getTokens());
 
 		Interpreter interpreter(new InterpreterArgs());
-        	interpreter.execute(app);
+        interpreter.execute(app);
 
 	}
 	catch(std::string error)

@@ -27,15 +27,20 @@ public:
 
     void parsePrint(std::list<Token> tokens);
 
+    void parseLog(std::list<Token> tokens);
+
     std::list<Node *> parseOperations(std::list<Token> tokens);
 
     std::list<Node *> parseLogicOperations(std::list<Token> tokens);
 
     std::list<Token> toPostfix(std::list<Token> tokens, const std::string& typeOperation, const std::function<short(std::string type)>& m);
 
-    std::list<Token> toLogicPostfix(std::list<Token> tokens);
+    //std::list<Token> toLogicPostfix(std::list<Token> tokens);
 
     Node* addMakedTree(std::list<Node*> nodes);
 
     void parseLine(std::list<Token> &tokens);
+
+public:
+    bool debug = false;
 };

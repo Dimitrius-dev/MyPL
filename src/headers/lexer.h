@@ -20,5 +20,7 @@ public:
 	void addToken(std::string input, int lineNum);
 	std::list<Token> getTokens() const;
 
-	void print();
+	void print() const;
+
+    bool debug = false;
 };
