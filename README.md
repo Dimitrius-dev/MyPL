@@ -7,9 +7,9 @@ ______
 Пример поддерживаемого кода
 
 a = 1<br>
-while(a < 25){
-    print(a)
-    log(a)
-    a = a + 1
-}
+while(a < 25){<br>
+    print(a)<br>
+    log(a)<br>
+    a = a + 1<br>
+}<br>
 
