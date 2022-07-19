@@ -6,10 +6,5 @@
 ______
 Пример поддерживаемого кода
 
-a = 1<br>
-while(a < 25){<br>
-    <t>print(a)<br>
-    log(a)<br>
-    a = a + 1<br>
-}<br>
+<p>a = 1&lt;br&gt;<br />while(a &lt; 25){<br />&nbsp; &nbsp;print(a)<br />&nbsp; &nbsp;log(a)<br />&nbsp; &nbsp;a = a + 1<br />}</p>
 
